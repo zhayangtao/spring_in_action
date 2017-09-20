@@ -1,5 +1,7 @@
 package spring.in.action.spittr;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -8,8 +10,12 @@ import java.util.Date;
 public class Spittle {
     private final Long id;
 
+    @NotNull
+    @Size(min = 5, max = 16)
     private final String message;
 
+    @NotNull
+    @Size(min = 5, max = 25)
     private final Date time;
 
     private Double latitude;

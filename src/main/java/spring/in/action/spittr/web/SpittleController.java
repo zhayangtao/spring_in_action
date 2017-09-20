@@ -3,12 +3,12 @@ package spring.in.action.spittr.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import spring.in.action.spittr.Spittle;
 import spring.in.action.spittr.data.SpittleRepository;
+
+import javax.validation.Valid;
 
 /**
  * Created by shliangyan on 2017/9/19.
@@ -42,7 +42,11 @@ public class SpittleController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processRegistration(Spittle spittle) {
+    public String processRegistration(@Valid Spittle spittle, Errors errors, @RequestPart byte[] profilePicture) {
+        if (errors.hasErrors()) {
+            return "registerForm";
+        }
+
         return "redirect:/spitter/spitter";
     }
 
